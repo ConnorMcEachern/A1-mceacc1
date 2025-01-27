@@ -10,14 +10,14 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+
 
 public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        System.out.println("** Starting Maze Runner");
+        logger.info("** Starting Maze Runner");
 
         Options options = new Options();
         options.addOption(Option.builder("i")
@@ -27,13 +27,12 @@ public class Main {
         .build());
 
         CommandLineParser parser = new DefaultParser();
-        CommandLine cdm = null;
 
         try {
             CommandLine cmd = parser.parse( options, args);
 
             String maze_file = cmd.getOptionValue("i");
-            System.out.println("**** Reading the maze from file " + maze_file);
+            logger.info("**** Reading the maze from file " + maze_file);
             BufferedReader reader = new BufferedReader(new FileReader(maze_file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -47,10 +46,11 @@ public class Main {
                 System.out.print(System.lineSeparator());
             }
         } catch(Exception e) {
-            System.err.println("/!\\ An error has occured /!\\");
+            logger.fatal("/!\\ An error has occured /!\\");
+            System.exit(0);
         }
-        System.out.println("**** Computing path");
-        System.out.println("PATH NOT COMPUTED");
-        System.out.println("** End of MazeRunner");
+        logger.info("**** Computing path");
+        logger.error("PATH NOT COMPUTED");
+        logger.info("** End of MazeRunner");
     }
 }
