@@ -2,12 +2,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 
 public class Maze {
 
     private boolean[][] walls;
 
-    public Maze (String maze_file) throws java.io.IOException {
+    public Maze (File maze_file) throws java.io.IOException {
         BufferedReader reader = new BufferedReader(new FileReader(maze_file));
         
         StringBuffer chars = new StringBuffer();

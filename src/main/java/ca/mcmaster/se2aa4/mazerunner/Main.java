@@ -7,6 +7,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import java.io.File;
 
 
 public class Main {
@@ -28,12 +29,12 @@ public class Main {
         try {
             CommandLine cmd = parser.parse( options, args);
 
-            String maze_file = cmd.getOptionValue("i");
+            File maze_file = new File(cmd.getOptionValue("i"));
             logger.info("**** Reading the maze from file " + maze_file);
             Maze maze = new Maze(maze_file);
             logger.info("**** Computing path");
-            Solver solver = new Solver(maze);
-            System.out.println(solver.getPath());
+            MazeSolver solver = new RightHandRule();
+            System.out.println(solver.getPath(maze));
             logger.info("** End of MazeRunner");
 
         } catch(Exception e) {

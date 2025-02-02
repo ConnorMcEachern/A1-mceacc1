@@ -1,39 +1,42 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Path {
-    List<Position> path;
+    StringBuilder pathString;
+    Position start;
+    Position end;
+    Direction dir;
 
     public Path(Position start) {
-        path = new LinkedList<Position>();
-        path.add(start);
+        pathString = new StringBuilder();
+        this.start = start;
+        this.end = start;
+        this.dir = Direction.Right();
     }
 
     public Position getPosition() {
-        return path.getLast();
+        return this.end;
     }
 
-    public void travel(Direction dir) {
-        path.add(path.getLast().move(dir));
+    public Direction getDirection() {
+        return this.dir;
+    }
+
+    public void travel() {
+        pathString.append('F');
+        end = getPosition().move(dir);
+    }
+
+    public void turnLeft() {
+        pathString.append('L');
+        dir = dir.turnLeft();
+    }
+
+    public void turnRight() {
+        pathString.append('R');
+        dir = dir.turnRight();
     }
 
     public String toString() {
-        StringBuffer pathString = new StringBuffer();
-        Direction facing = Direction.Right();
-        int i = 1;
-        while(i<path.size()) {
-            Position current = path.get(i-1);
-            Position next = path.get(i);
-            if (current.move(facing).equals(next)) {
-                pathString.append("F");
-                i++;
-            } else {
-                pathString.append("R");
-                facing = facing.turnRight();
-            }
-        }
         return pathString.toString();
     }
 }
