@@ -24,17 +24,35 @@ public class Main {
             .required(true)
         .build());
 
+        options.addOption(Option.builder("p")
+            .hasArg(true)
+            .desc("PATH_SEQUENCE")
+            .required(false)
+        .build());
+
         CommandLineParser parser = new DefaultParser();
 
         try {
-            CommandLine cmd = parser.parse( options, args);
+            CommandLine cmd = parser.parse(options, args);
 
             File maze_file = new File(cmd.getOptionValue("i"));
             logger.info("**** Reading the maze from file " + maze_file);
             Maze maze = new Maze(maze_file);
-            logger.info("**** Computing path");
-            MazeSolver solver = new RightHandRule();
-            System.out.println(solver.getPath(maze));
+            if (cmd.hasOption("p")) {
+                String pathString = cmd.getOptionValue("p");
+                logger.info("**** Checking path");
+                Checker checker = new Checker();
+                boolean validPath = checker.checkPath(maze, pathString);
+                if (validPath) {
+                    System.out.println("correct path");
+                } else {
+                    System.out.println("inccorrect path");
+                }
+            } else {
+                logger.info("**** Computing path");
+                MazeSolver solver = new RightHandRule();
+                System.out.println(solver.getPath(maze));
+            }
             logger.info("** End of MazeRunner");
 
         } catch(Exception e) {

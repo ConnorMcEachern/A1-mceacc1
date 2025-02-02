@@ -2,19 +2,17 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class Path {
     StringBuilder pathString;
-    Position start;
-    Position end;
+    Position pos;
     Direction dir;
 
     public Path(Position start) {
         pathString = new StringBuilder();
-        this.start = start;
-        this.end = start;
+        this.pos = start;
         this.dir = Direction.Right();
     }
 
     public Position getPosition() {
-        return this.end;
+        return this.pos;
     }
 
     public Direction getDirection() {
@@ -23,7 +21,7 @@ public class Path {
 
     public void travel() {
         pathString.append('F');
-        end = getPosition().move(dir);
+        pos = getPosition().move(dir);
     }
 
     public void turnLeft() {
