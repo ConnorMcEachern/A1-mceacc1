@@ -31,6 +31,7 @@ public class Main {
         .build());
 
         CommandLineParser parser = new DefaultParser();
+        StringFactorizer factorizer = new StringFactorizer();
 
         try {
             CommandLine cmd = parser.parse(options, args);
@@ -42,7 +43,7 @@ public class Main {
                 String pathString = cmd.getOptionValue("p");
                 logger.info("**** Checking path");
                 Checker checker = new Checker();
-                boolean validPath = checker.checkPath(maze, pathString);
+                boolean validPath = checker.checkPath(maze, factorizer.expand(pathString));
                 if (validPath) {
                     System.out.println("correct path");
                 } else {
@@ -51,7 +52,8 @@ public class Main {
             } else {
                 logger.info("**** Computing path");
                 MazeSolver solver = new RightHandRule();
-                System.out.println(solver.getPath(maze));
+                String output = factorizer.factorize(solver.getPath(maze).toString());
+                System.out.println(output);
             }
             logger.info("** End of MazeRunner");
 
