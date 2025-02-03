@@ -58,6 +58,8 @@ public class Main {
             logger.debug("** End of MazeRunner");
 
         } catch(Exception e) {
+            System.err.println("/!\\ An error has occured /!\\");
+            System.err.println("PATH NOT COMPUTED");
             logger.fatal(e.getLocalizedMessage());
             System.exit(0);
         }
