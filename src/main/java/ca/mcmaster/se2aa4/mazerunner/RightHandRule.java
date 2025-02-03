@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class RightHandRule extends MazeSolver {
+public class RightHandRule implements MazeSolver {
     
     public Path getPath(Maze maze) {
         Path path = new Path(maze.startingPosition());
