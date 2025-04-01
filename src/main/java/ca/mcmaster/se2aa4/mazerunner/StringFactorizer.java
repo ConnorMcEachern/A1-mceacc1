@@ -26,6 +26,9 @@ public class StringFactorizer {
         String[] steps = str.split("(?<!\\d)| ");
         int n = 1;
         for (String s : steps) {
+            if (s.charAt(0) == ' ') {
+                continue;
+            }
             if (Character.isDigit(s.charAt(0))) {
                 n = Integer.parseInt(s.substring(0, s.length()-1));
             } else {
@@ -35,7 +38,7 @@ public class StringFactorizer {
                 expandedString.append(s.charAt(s.length()-1));
             }
         }
-
+        
         return expandedString.toString();
     }
 }
