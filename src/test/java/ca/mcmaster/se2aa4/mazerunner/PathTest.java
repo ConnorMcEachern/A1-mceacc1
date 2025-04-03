@@ -29,7 +29,7 @@ class PathTest {
     void testTravel() {
         Position newPos = startPosition.move(Direction.Right());
         path.travel();
-        assertEquals(newPos, path.getPosition());
+        assertTrue(newPos.equals(path.getPosition()));
         assertEquals("F", path.toString());
     }
 
