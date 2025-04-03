@@ -1,10 +1,28 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public class Direction {
-    private int dir;
+    private final int dir;
+    private static final Direction right = new Direction(0);
+    private static final Direction down  = new Direction(1);
+    private static final Direction left  = new Direction(2);
+    private static final Direction up    = new Direction(3);
 
     private Direction (int dir) {
         this.dir = dir;
+    }
+
+    private Direction fromDir(int dir) {
+        if (dir==0) {
+            return right;
+        } else if (dir==1) {
+            return down;
+        } else if (dir==2) {
+            return left;
+        } else if (dir==3) {
+            return up;
+        } else {
+            return null;
+        }
     }
 
     public boolean equals(Direction other) {
@@ -12,24 +30,24 @@ public class Direction {
     }
 
     public Direction turnLeft() {
-        return new Direction((dir + 3)%4);
+        return fromDir((dir + 3)%4);
     }
 
     public Direction turnRight() {
-        return new Direction((dir + 1)%4);
+        return fromDir((dir + 1)%4);
     }
 
     public static Direction Right() {
-        return new Direction(0);
+        return right;
     }
     public static Direction Down() {
-        return new Direction(1);
+        return down;
     }
     public static Direction Left() {
-        return new Direction(2);
+        return left;
     }
     public static Direction Up() {
-        return new Direction(3);
+        return up;
     }
 
     public String toString() {
