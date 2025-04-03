@@ -3,7 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class PositionTests {
+public class PositionTest {
     @Test
     public void testToString() {
         Position pos = new Position(4, 3);
@@ -16,14 +16,14 @@ public class PositionTests {
     }
 
     @Test
-    public void getters() {
+    public void testGetters() {
         Position pos = new Position(2, 3);
         assertEquals(2, pos.getRow());
         assertEquals(3, pos.getColumn());
     }
 
     @Test
-    public void moving() {
+    public void testMoving() {
         Position pos = new Position(0, 0);
         assertTrue(pos.move(Direction.Up()).equals(new Position(-1, 0)));
         assertTrue(pos.move(Direction.Right() ).equals(new Position(0, 1)));

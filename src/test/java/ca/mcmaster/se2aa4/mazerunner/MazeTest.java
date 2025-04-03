@@ -6,10 +6,9 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
-public class MazeTests {
-
+public class MazeTest {
     @Test
-    void buildSmallMaze() {
+    public void testBuildSmallMaze() {
         try {
             Maze maze = new Maze(new File("./examples/small.maz.txt"));
             assertEquals(11, maze.getHeight());
@@ -39,18 +38,33 @@ public class MazeTests {
     }
 
     @Test
-    void buildMazesTestRandomPositions() {
+    public void testBuildMazesCheckSizes() {
+        try {
+            Maze maze = new Maze(new File("./examples/giant.maz.txt"));
+            assertEquals(151, maze.getHeight());
+            assertEquals(151, maze.getLength());
+
+            maze = new Maze(new File("./examples/tiny.maz.txt"));
+            assertEquals(7, maze.getHeight());
+            assertEquals(7, maze.getLength());
+
+            maze = new Maze(new File("./examples/rectangle.maz.txt"));
+            assertEquals(21, maze.getHeight());
+            assertEquals(51, maze.getLength());
+        } catch (Exception e) {
+            assertTrue(false);
+        }
+    }
+
+    @Test
+    public void testBuildMazesTestRandomPositions() {
         try {
             Maze maze = new Maze(new File("./examples/direct.maz.txt"));
-            assertEquals(7, maze.getHeight());
-            assertEquals(8, maze.getLength());
             assertTrue(maze.isWallAt(new Position(2, 3)));
             assertFalse(maze.isWallAt(new Position(3, 3)));
             assertTrue(maze.isWallAt(new Position(4, 3)));
 
             maze = new Maze(new File("./examples/huge.maz.txt"));
-            assertEquals(101, maze.getHeight());
-            assertEquals(101, maze.getLength());
             assertTrue(maze.isWallAt(new Position(19, 50)));
             assertTrue(maze.isWallAt(new Position(20, 50)));
             assertFalse(maze.isWallAt(new Position(21, 50)));
@@ -58,8 +72,6 @@ public class MazeTests {
             assertFalse(maze.isWallAt(new Position(20, 51)));
 
             maze = new Maze(new File("./examples/rectangle.maz.txt"));
-            assertEquals(21, maze.getHeight());
-            assertEquals(51, maze.getLength());
             assertTrue(maze.isWallAt(new Position(20, 50)));
             assertTrue(maze.isWallAt(new Position(19, 50)));
             assertTrue(maze.isWallAt(new Position(20, 49)));

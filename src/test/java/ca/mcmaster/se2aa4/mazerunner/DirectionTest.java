@@ -3,7 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class DirectionTests {
+public class DirectionTest {
     @Test
     public void testToString() {
         assertEquals("RIGHT", Direction.Right().toString());
@@ -13,7 +13,7 @@ public class DirectionTests {
     }
 
     @Test
-    public void rights() {
+    public void testRights() {
         Direction dir = Direction.Up();
 
         assertTrue(Direction.Right().equals(dir.turnRight()));
@@ -23,7 +23,7 @@ public class DirectionTests {
     }
 
     @Test
-    public void lefts() {
+    public void testLefts() {
         Direction dir = Direction.Up();
 
         assertTrue(Direction.Left() .equals(dir.turnLeft()));
