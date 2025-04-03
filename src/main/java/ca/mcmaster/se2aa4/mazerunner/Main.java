@@ -23,7 +23,9 @@ public class Main {
 
             File maze_file = new File(cmd.getOptionValue("i"));
             logger.debug("**** Reading the maze from file " + maze_file);
-            Maze maze = new Maze(maze_file);
+            Maze maze = new MazeFromFile()
+                .file(maze_file)
+                .build();
             if (cmd.hasOption("p")) {
                 logger.debug("**** Checking path");
                 checkPath(maze, cmd.getOptionValue("p"));
